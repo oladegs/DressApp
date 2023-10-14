@@ -1,4 +1,3 @@
-// Do not expose your credentials in your code.
 let config = require("./config");
 
 // Database setup
@@ -12,6 +11,7 @@ module.exports = function () {
   mongodb.on("error", console.error.bind(console, "Connection Error: "));
   mongodb.once("open", () => {
     console.log("====> Connected to MongoDB.");
+    console.log("====> Ready to work");
   });
 
   return mongodb;

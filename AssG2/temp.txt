@@ -1,2 +1,0 @@
-// Connection String
-mongodb+srv://dbuser:YQYOl2hssbt01S0J@cluster0.u5befez.mongodb.net/

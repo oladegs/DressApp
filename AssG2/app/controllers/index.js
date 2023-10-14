@@ -1,5 +1,6 @@
 let ProductModel = require("../models/productModel");
 
+// Home page on the browser
 exports.home = (req, res) => {
   res.send(`{"message" : "Welcome to DressStore Application."}`);
 };
@@ -40,35 +41,35 @@ exports.addNewProducts = async (req, res) => {
   }
 };
 
-// // Update product by id to the Database
-// router.put("/products/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const product = await Product.findByIdAndUpdate(id, req.body);
-//     if (!product) {
-//       return res
-//         .status(404)
-//         .json({ message: `cannot find any product with ID ${id}` });
-//     }
-//     const updatedProduct = await Product.findById(id);
-//     res.status(200).json(updatedProduct);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
+// Update product by id to the Database
+exports.updateProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await ProductModel.findByIdAndUpdate(id, req.body);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ message: `cannot find any product with ID ${id}` });
+    }
+    const updatedProduct = await ProductModel.findById(id);
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-// // Remove product by id from the Database
-// router.delete("/products/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const product = await Product.findByIdAndDelete(id);
-//     if (!product) {
-//       return res
-//         .status(404)
-//         .json({ message: `cannot find any product with ID ${id}` });
-//     }
-//     res.status(200).json(product);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
+// Remove product by id from the Database
+exports.delProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await ProductModel.findByIdAndDelete(id);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ message: `cannot find any product with ID ${id} :(` });
+    }
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
